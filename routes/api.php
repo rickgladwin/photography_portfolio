@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Resources\User as UserResource;
+use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +18,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('test', function() {
+    return 'success';
+});
+
+Route::get('user/{user}/album/{album}', function($userId, $albumId = null) {
+    return "user: $userId, album: $albumId";
+});
+
+Route::get('user/{user}', function($userId) {
+    return new UserResource(User::find($userId));
 });

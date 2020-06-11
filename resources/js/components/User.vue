@@ -3,11 +3,11 @@
         <div class="col-xs-12">
             <div class="user-info-container">
                 <div class="user-profile-pic">pic</div>
-                <div class="user-name">{{ this.user_info.name }}</div>
+                <div class="user-name">{{ user_info.name }}</div>
                 <div class="user-bio">bio</div>
                 <div class="user-contact-info">contact</div>
             </div>
-            <button type="button" onclick="this.updateStuff()">click</button>
+            <button type="button" onclick="updateStuff()">click</button>
             <div>Test data: {{ test_data }}</div>
             <div>Album: {{ album }}</div>
             <div class="photos-container">
@@ -22,17 +22,18 @@
 
 <script>
     export default {
-        name: 'user',
+        // name: 'User',
+        // props: ['user'],
         data() {
             return {
-                test_data: 'test result',
+                test_data: 'initial result',
                 album: [],
                 photo: {
                     id: '',
                     img: '',
                 },
                 user_info: {
-                    name: 'jh',
+                    name: 'temp name',
                     phone: '',
                     email: '',
                     bio: '',
@@ -41,17 +42,20 @@
             }
         },
         created() {
-            this.updateStuff();
             this.fetchUser();
-            this.test_data = 'new result';
-            this.user_info.name = 'new name';
+            this.test_data = 'created result';
+            // this.user_info.name = 'new name';
+            this.updateStuff();
         },
         methods: {
             updateStuff() {
                 setTimeout(() => {
                     this.test_data = 'updated result';
+                    console.log('user_info:',this.user_info);
                     this.user_info.name = 'updated name';
                     console.log('setTimeout fired');
+                    Vue.set(this.user_info, 'name', 'set name');
+                    console.log('set user_info.name:', this.user_info.name)
                 }, 2000);
             },
             fetchUser() {
@@ -71,7 +75,7 @@
             }
         },
         mounted() {
-            console.log('Photos component mounted.')
+            console.log('User component mounted.')
         }
     }
 </script>

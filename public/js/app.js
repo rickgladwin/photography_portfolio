@@ -1931,17 +1931,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'user',
+  // name: 'User',
+  // props: ['user'],
   data: function data() {
     return {
-      test_data: 'test result',
+      test_data: 'initial result',
       album: [],
       photo: {
         id: '',
         img: ''
       },
       user_info: {
-        name: 'jh',
+        name: 'temp name',
         phone: '',
         email: '',
         bio: '',
@@ -1950,10 +1951,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    this.updateStuff();
     this.fetchUser();
-    this.test_data = 'new result';
-    this.user_info.name = 'new name';
+    this.test_data = 'created result'; // this.user_info.name = 'new name';
+
+    this.updateStuff();
   },
   methods: {
     updateStuff: function updateStuff() {
@@ -1961,8 +1962,11 @@ __webpack_require__.r(__webpack_exports__);
 
       setTimeout(function () {
         _this.test_data = 'updated result';
+        console.log('user_info:', _this.user_info);
         _this.user_info.name = 'updated name';
         console.log('setTimeout fired');
+        Vue.set(_this.user_info, 'name', 'set name');
+        console.log('set user_info.name:', _this.user_info.name);
       }, 2000);
     },
     fetchUser: function fetchUser() {
@@ -1984,7 +1988,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log('Photos component mounted.');
+    console.log('User component mounted.');
   }
 });
 
@@ -37539,7 +37543,7 @@ var render = function() {
         _c("div", { staticClass: "user-profile-pic" }, [_vm._v("pic")]),
         _vm._v(" "),
         _c("div", { staticClass: "user-name" }, [
-          _vm._v(_vm._s(this.user_info.name))
+          _vm._v(_vm._s(_vm.user_info.name))
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "user-bio" }, [_vm._v("bio")]),
@@ -37547,11 +37551,9 @@ var render = function() {
         _c("div", { staticClass: "user-contact-info" }, [_vm._v("contact")])
       ]),
       _vm._v(" "),
-      _c(
-        "button",
-        { attrs: { type: "button", onclick: "this.updateStuff()" } },
-        [_vm._v("click")]
-      ),
+      _c("button", { attrs: { type: "button", onclick: "updateStuff()" } }, [
+        _vm._v("click")
+      ]),
       _vm._v(" "),
       _c("div", [_vm._v("Test data: " + _vm._s(_vm.test_data))]),
       _vm._v(" "),

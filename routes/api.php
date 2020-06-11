@@ -6,6 +6,7 @@ use App\Http\Resources\User as UserResource;
 use App\Http\Resources\Photo as PhotoResource;
 use App\User;
 use App\Photo;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +35,17 @@ Route::get('user/{user}', function($userId) {
     return new UserResource(User::find($userId));
 });
 
-Route::get('photo/{photo}', function ($photoId) {
-    return new PhotoResource(Photo::find($photoId));
+Route::get('photo/{photo}/likes_count', function ($photoId) {
+//    return new PhotoResource(Photo::find($photoId));
+//    $photoResource = new PhotoResource(Photo::find($photoId));
+//    return $photoResource['likes_count'];
+//    return Photo::find($photoId)->likes->count();
+    Log::debug("route photo/$photoId/likes_count called");
+    $likes_count = Photo::find($photoId)->likes->count();
+    Log::debug("returning " . json_encode(['likes_count' => $likes_count]));
+    return json_encode(['likes_count' => $likes_count]);
+});
+
+Route::put('photo/{photo}/like/{user}', function($photoId, $userId) {
+    return 'liked';
 });

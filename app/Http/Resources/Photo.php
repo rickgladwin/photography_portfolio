@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Log;
 
 class Photo extends JsonResource
 {
@@ -15,6 +16,8 @@ class Photo extends JsonResource
     public function toArray($request)
     {
 //        return parent::toArray($request);
+
+        Log::debug('Photo $request: ' . json_encode($request));
 
         return [
             'id' => $this->id,

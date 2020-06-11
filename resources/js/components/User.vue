@@ -1,52 +1,42 @@
 <template>
     <div class="app-container">
         <div class="row no-gutters">
-<!--            <div class="user-info-container">-->
-                <div class="col">
-                    <div class="row header-row">
-                        <div class="col header-col">
-                            <div class="user-profile-pic"><img v-bind:src="profile_picture_src" v-bind:alt="profile_picture_alt"></div>
-<!--                        </div>-->
-<!--                        <div class="col header-col">-->
-                            <div class="user-name">{{ user_info.name }}</div>
-                            <div class="user-bio">{{ user_info.bio }}</div>
-                        </div>
-                        <div class="col-3 header-col">
-                            <div class="user-contact-info">
-                                phone: {{ user_info.phone }}<br>
-                                email: {{ user_info.email }}<br>
-                                insta: @nickphoto<br>
-                                twitter: @nickphoto
-                            </div>
+            <div class="col">
+                <div class="row header-row">
+                    <div class="col header-col">
+                        <div class="user-profile-pic"><img v-bind:src="profile_picture_src" v-bind:alt="profile_picture_alt"></div>
+                        <div class="user-name">{{ user_info.name }}</div>
+                        <div class="user-bio">{{ user_info.bio }}</div>
+                    </div>
+                    <div class="col-3 header-col">
+                        <div class="user-contact-info">
+                            phone: {{ user_info.phone }}<br>
+                            email: {{ user_info.email }}<br>
+                            insta: @nickphoto<br>
+                            twitter: @nickphoto
                         </div>
                     </div>
                 </div>
-<!--            </div>-->
+            </div>
         </div>
         <div class="row row-cols-1 row-cols-sm-2 no-gutters">
-<!--            <div class="photos-container">-->
-<!--                <div class="col-xs-3 col-md-3 col-lg-4" v-for="photo in album" v-bind:key="photo.id">-->
-                <div class="col photo-col" v-for="photo in album" v-bind:key="photo.id"
-                     @mouseover="addHover(photo.id)"
-                     @mouseleave="removeHover(photo.id)">
-<!--                <div class="col photo-col" v-for="photo in album" v-bind:key="photo.id" v-on:mouseover="alert('hovered')">-->
-<!--                <div class="col" v-for="photo in album" v-bind:key="photo.id">-->
-<!--                    <div class="photo-container">-->
-                        <img class="photo-thumb" :src="photo.img" alt="landscape photo" style="width:100%" :id="photo.id">
-                        <div class="photo-info">
-                            <div class="photo-title photo-info-snippet">{{ photo.title }}</div>
-                            <div class="photo-description photo-info-snippet">{{ photo.description }}</div>
-                            <div class="photo-date photo-info-snippet">{{ photo.date }}</div>
-                            <div class="photo-like">
-                                <i v-if="photo.has_likes" class="fas fa-heart"></i>
-                                <i v-if="!photo.has_likes" class="far fa-heart"></i>
-<!--                                {{ photo.likes_count }}-->
-                                23
-                            </div>
-                        </div>
+            <div class="col photo-col" v-for="photo in album" v-bind:key="photo.id"
+                 @mouseover="addHover(photo.id)"
+                 @mouseleave="removeHover(photo.id)">
+                <photo v-bind:photo="photo"></photo>
+
+<!--                    <img class="photo-thumb" :src="photo.img" alt="landscape photo" style="width:100%" :id="photo.id">-->
+<!--                    <div class="photo-info">-->
+<!--                        <div class="photo-title photo-info-snippet">{{ photo.title }}</div>-->
+<!--                        <div class="photo-description photo-info-snippet">{{ photo.description }}</div>-->
+<!--                        <div class="photo-date photo-info-snippet">{{ photo.date }}</div>-->
+<!--                        <div class="photo-like">-->
+<!--                            <i v-if="photo.has_likes" class="fas fa-heart"></i>-->
+<!--                            <i v-if="!photo.has_likes" class="far fa-heart"></i>-->
+<!--                            23-->
+<!--                        </div>-->
 <!--                    </div>-->
-                </div>
-<!--            </div>-->
+            </div>
         </div>
     </div>
 </template>
@@ -94,16 +84,13 @@
                 })
             },
             addHover(photo_id) {
-                var element = document.getElementById(photo_id);
+                let element = document.getElementById(photo_id);
                 element.classList.add("hovered");
             },
             removeHover(photo_id) {
-                var element = document.getElementById(photo_id);
+                let element = document.getElementById(photo_id);
                 element.classList.remove("hovered");
             },
-            likePhoto(photo_id) {
-
-            }
         },
         mounted() {
             console.log('User component mounted.')

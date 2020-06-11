@@ -1,0 +1,54 @@
+.photo-info {
+    opacity: 0;
+    transition: opacity 0.5s;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.35);
+    color: white;
+    padding: 15px;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    .photo-title {
+        font-size: 1.5em;
+    }
+
+    .photo-info-snippet {
+        max-width: 90%;
+    }
+
+    .photo-like {
+        position: absolute;
+        top: 1.5em;
+        right: 1.5em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .photo-like > * {
+        display: block;
+    }
+}
+
+.photo-col {
+    max-height: 33vh;
+    overflow: hidden;
+
+    .photo-thumb {
+        transition: transform 0.5s;
+        &.hovered {
+            transform: scale(1.05);
+        }
+    }
+    .photo-thumb {
+        &:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+    }
+}

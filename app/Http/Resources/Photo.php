@@ -23,6 +23,7 @@ class Photo extends JsonResource
             'img' => $this->img,
             'date' => $this->date,
             'featured' => $this->featured,
+            'likes_count' => $this->likes->count()
         ];
     }
 }

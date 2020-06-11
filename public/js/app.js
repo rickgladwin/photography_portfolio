@@ -1930,62 +1930,89 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  // name: 'User',
-  // props: ['user'],
   data: function data() {
     return {
-      test_data: 'initial result',
       album: [],
       photo: {
         id: '',
         img: ''
       },
       user_info: {
-        name: 'temp name',
+        name: '',
         phone: '',
         email: '',
         bio: '',
-        profile_picture: ''
+        profile_picture: 'img/profile.jpg'
       }
     };
   },
   created: function created() {
     this.fetchUser();
-    this.test_data = 'created result'; // this.user_info.name = 'new name';
-
-    this.updateStuff();
+  },
+  computed: {
+    profile_picture_src: function profile_picture_src() {
+      return this.user_info.profile_picture;
+    },
+    profile_picture_alt: function profile_picture_alt() {
+      return this.user_info.name + ' profile';
+    }
   },
   methods: {
-    updateStuff: function updateStuff() {
-      var _this = this;
-
-      setTimeout(function () {
-        _this.test_data = 'updated result';
-        console.log('user_info:', _this.user_info);
-        _this.user_info.name = 'updated name';
-        console.log('setTimeout fired');
-        Vue.set(_this.user_info, 'name', 'set name');
-        console.log('set user_info.name:', _this.user_info.name);
-      }, 2000);
-    },
     fetchUser: function fetchUser() {
-      var _this2 = this;
+      var _this = this;
 
       fetch('/api/user/1').then(function (res) {
         return res.json();
       }).then(function (res) {
-        console.log('album:', res.album);
-        console.log('email:', res.email);
-        console.log('name:', res.name);
-        _this2.album = res.album;
-        _this2.user_info.name = res.name;
-        _this2.user_info.phone = res.phone;
-        _this2.user_info.email = res.email;
-        _this2.user_info.bio = res.bio;
-        _this2.user_info.profile_picture = res.profile_picture;
+        _this.album = res.album;
+        _this.user_info.name = res.name;
+        _this.user_info.phone = res.phone;
+        _this.user_info.email = res.email;
+        _this.user_info.bio = res.bio;
+        _this.user_info.profile_picture = res.profile_picture;
       });
-    }
+    },
+    addHover: function addHover(photo_id) {
+      var element = document.getElementById(photo_id);
+      element.classList.add("hovered");
+    },
+    removeHover: function removeHover(photo_id) {
+      var element = document.getElementById(photo_id);
+      element.classList.remove("hovered");
+    },
+    likePhoto: function likePhoto(photo_id) {}
   },
   mounted: function mounted() {
     console.log('User component mounted.');
@@ -37537,43 +37564,111 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-xs-12" }, [
-      _c("div", { staticClass: "user-info-container" }, [
-        _c("div", { staticClass: "user-profile-pic" }, [_vm._v("pic")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "user-name" }, [
-          _vm._v(_vm._s(_vm.user_info.name))
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "user-bio" }, [_vm._v("bio")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "user-contact-info" }, [_vm._v("contact")])
-      ]),
-      _vm._v(" "),
-      _c("button", { attrs: { type: "button", onclick: "updateStuff()" } }, [
-        _vm._v("click")
-      ]),
-      _vm._v(" "),
-      _c("div", [_vm._v("Test data: " + _vm._s(_vm.test_data))]),
-      _vm._v(" "),
-      _c("div", [_vm._v("Album: " + _vm._s(_vm.album))]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "photos-container" },
-        [
-          _vm._v("\n            Photos:\n            "),
-          _vm._l(_vm.album, function(photo) {
-            return _c("div", { key: photo.id }, [
-              _vm._v("\n                photo: "),
-              _c("div", [_vm._v(_vm._s(photo.img))])
+  return _c("div", { staticClass: "app-container" }, [
+    _c("div", { staticClass: "row no-gutters" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "row header-row" }, [
+          _c("div", { staticClass: "col header-col" }, [
+            _c("div", { staticClass: "user-profile-pic" }, [
+              _c("img", {
+                attrs: {
+                  src: _vm.profile_picture_src,
+                  alt: _vm.profile_picture_alt
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "user-name" }, [
+              _vm._v(_vm._s(_vm.user_info.name))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "user-bio" }, [
+              _vm._v(_vm._s(_vm.user_info.bio))
             ])
-          })
-        ],
-        2
-      )
-    ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-3 header-col" }, [
+            _c("div", { staticClass: "user-contact-info" }, [
+              _vm._v(
+                "\n                                phone: " +
+                  _vm._s(_vm.user_info.phone)
+              ),
+              _c("br"),
+              _vm._v(
+                "\n                                email: " +
+                  _vm._s(_vm.user_info.email)
+              ),
+              _c("br"),
+              _vm._v("\n                                insta: @nickphoto"),
+              _c("br"),
+              _vm._v(
+                "\n                                twitter: @nickphoto\n                            "
+              )
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row row-cols-1 row-cols-sm-2 no-gutters" },
+      _vm._l(_vm.album, function(photo) {
+        return _c(
+          "div",
+          {
+            key: photo.id,
+            staticClass: "col photo-col",
+            on: {
+              mouseover: function($event) {
+                return _vm.addHover(photo.id)
+              },
+              mouseleave: function($event) {
+                return _vm.removeHover(photo.id)
+              }
+            }
+          },
+          [
+            _c("img", {
+              staticClass: "photo-thumb",
+              staticStyle: { width: "100%" },
+              attrs: { src: photo.img, alt: "landscape photo", id: photo.id }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "photo-info" }, [
+              _c("div", { staticClass: "photo-title photo-info-snippet" }, [
+                _vm._v(_vm._s(photo.title))
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "photo-description photo-info-snippet" },
+                [_vm._v(_vm._s(photo.description))]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "photo-date photo-info-snippet" }, [
+                _vm._v(_vm._s(photo.date))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "photo-like" }, [
+                photo.has_likes
+                  ? _c("i", { staticClass: "fas fa-heart" })
+                  : _vm._e(),
+                _vm._v(" "),
+                !photo.has_likes
+                  ? _c("i", { staticClass: "far fa-heart" })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm._v(
+                  "\n                                23\n                            "
+                )
+              ])
+            ])
+          ]
+        )
+      }),
+      0
+    )
   ])
 }
 var staticRenderFns = []
@@ -49771,7 +49866,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
-Vue.component('user', __webpack_require__(/*! ./components/User.vue */ "./resources/js/components/User.vue")["default"]);
+Vue.component('user', __webpack_require__(/*! ./components/User.vue */ "./resources/js/components/User.vue")["default"]); // Vue.component('test', require('./components/Test.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

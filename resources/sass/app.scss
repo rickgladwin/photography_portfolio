@@ -6,3 +6,10 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Modules
+@import 'modules/fonts';
+@import 'modules/defaults';
+@import 'modules/users';
+@import 'modules/photos';
+@import 'modules/headers';

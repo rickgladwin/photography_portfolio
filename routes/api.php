@@ -3,7 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Resources\User as UserResource;
+use App\Http\Resources\Photo as PhotoResource;
 use App\User;
+use App\Photo;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +32,8 @@ Route::get('user/{user}/album/{album}', function($userId, $albumId = null) {
 
 Route::get('user/{user}', function($userId) {
     return new UserResource(User::find($userId));
+});
+
+Route::get('photo/{photo}', function ($photoId) {
+    return new PhotoResource(Photo::find($photoId));
 });

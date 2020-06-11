@@ -1,0 +1,12 @@
+.header-row {
+    height: 10vh;
+    transition: height 0.2s;
+
+    &:hover {
+        height: 15vh;
+    }
+}
+
+.header-col {
+    height: 100%;
+}

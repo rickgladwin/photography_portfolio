@@ -54,4 +54,6 @@ The app was built and tested on:
 * MySQL 5.7.29
 * PHP 7.4.5
 
-and tested in Chrome Version 83.0.4103.97 in various viewport sizes. In production, more thorough cross-browser testing would be carried out.  
+and tested in Chrome Version 83.0.4103.97 in various viewport sizes. In production, more thorough cross-browser testing would be carried out. 
+
+Console logging has been left turned on for demo/dev purposes. In production console logs would be stripped out during transpiling by webpack/Mix.

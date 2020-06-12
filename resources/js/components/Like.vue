@@ -1,9 +1,8 @@
 <template>
     <div class="photo-like">
         <i v-if="likes_count > 0" class="fas fa-heart"></i>
-        <i v-if="!likes_count > 0" class="far fa-heart"></i>
-                                       count:{{ likes_count }}
-        test: 23
+        <i v-if="!(likes_count > 0)" class="far fa-heart"></i>
+        {{ likes_count }}
     </div>
 </template>
 
@@ -12,11 +11,6 @@
         name: 'Like',
         data() {
             return {
-                id: '1',
-                title: '',
-                description: '',
-                date: '',
-                img: '',
                 likes_count: 0,
             }
         },
@@ -24,21 +18,18 @@
             'photo_id',
         ],
         created() {
-            this.fetchLikesCount();
+            // this.fetchLikesCount();
         },
         methods: {
             fetchLikesCount() {
-                console.log(`fetchLikesCount(${this.id}`);
-                fetch(`api/photo/${this.id}/likes_count`)
-                .then(res => res.json())
-                .then(res => console.log('likes_count: ', res))
-                .then(res => {
-                    this.likes_count = res;
-                })
+                console.log(`fetchLikesCount(${this.photo_id})`);
+                fetch(`api/photo/${this.photo_id}/likes_count`)
+                    .then(res => res.json())
+                    .then(res => this.likes_count = res.likes_count)
             },
         },
         mounted() {
-            console.log('Photo component mounted.')
+            console.log('Like component mounted.')
         }
     }
 </script>

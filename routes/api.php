@@ -23,9 +23,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('test', function() {
-    return 'success';
-});
 
 Route::get('user/{user}/album/{album}', function($userId, $albumId = null) {
     return "user: $userId, album: $albumId";
@@ -41,7 +38,6 @@ Route::get('photo/{photo}/likes_count', function ($photoId) {
     } catch (Exception $e) {
         $likes_count = 0;
     }
-
     return json_encode(['likes_count' => $likes_count]);
 });
 

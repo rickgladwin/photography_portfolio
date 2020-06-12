@@ -17015,9 +17015,21 @@ body {
      object-fit: fill;
 }
 
+@media (max-width: 767.98px) {
+  .user-profile-pic {
+    display: none;
+  }
+}
+
 .user-name {
   font-family: "Beth Ellen", cursive, sans-serif;
   font-size: 1.75em;
+}
+
+@media (max-width: 767.98px) {
+  .user-name {
+    padding: 0.6em;
+  }
 }
 
 .user-bio {
@@ -17025,8 +17037,36 @@ body {
   width: 50vw;
 }
 
+@media (max-width: 991.98px) {
+  .user-bio {
+    width: 42vw;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .user-bio {
+    display: none;
+  }
+}
+
 .user-contact-info {
   padding-top: 2.75em;
+}
+
+@media (max-width: 767.98px) {
+  .user-contact-info {
+    display: none;
+  }
+}
+
+.user-contact-info-mobile {
+  padding: 0 1em 1em 1em;
+}
+
+@media (min-width: 576px) {
+  .user-contact-info-mobile {
+    display: none;
+  }
 }
 
 .photo-info {
@@ -17089,8 +17129,22 @@ body {
   transition: height 0.2s;
 }
 
+@media (max-width: 767.98px) {
+  .header-row {
+    min-height: 20vh;
+    height: auto;
+  }
+}
+
 .header-row:hover {
   height: 15vh;
+}
+
+@media (max-width: 767.98px) {
+  .header-row:hover {
+    min-height: 20vh;
+    height: auto;
+  }
 }
 
 .header-col {

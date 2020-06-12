@@ -7,7 +7,7 @@
             <div class="photo-date photo-info-snippet">{{ photo.date }}</div>
             <div class="photo-like">
                 <i v-if="likes_count > 0" class="fas fa-heart"></i>
-                <i v-if="!likes_count > 0" class="far fa-heart"></i>
+                <i v-if="!(likes_count > 0)" class="far fa-heart"></i>
                 {{ this.likes_count }}
             </div>
         </div>
@@ -38,12 +38,7 @@
                 console.log(`fetchLikesCount(${this.photo.id})`);
                 fetch(`api/photo/${this.photo.id}/likes_count`)
                 .then(res => res.json())
-                // .then(res => console.log('likes_count: ', res['likes_count']))
-                // .then(res => {
-                // // this.likes_count = res;
-                // this.likes_count = res['likes_count'];
-                // })
-                .then(res => this.likes_count = res['likes_count'])
+                .then(res => this.likes_count = res.likes_count)
             },
         },
         mounted() {

@@ -1947,13 +1947,8 @@ __webpack_require__.r(__webpack_exports__);
       console.log("fetchLikesCount(".concat(this.photo.id, ")"));
       fetch("api/photo/".concat(this.photo.id, "/likes_count")).then(function (res) {
         return res.json();
-      }) // .then(res => console.log('likes_count: ', res['likes_count']))
-      // .then(res => {
-      // // this.likes_count = res;
-      // this.likes_count = res['likes_count'];
-      // })
-      .then(function (res) {
-        return _this.likes_count = res['likes_count'];
+      }).then(function (res) {
+        return _this.likes_count = res.likes_count;
       });
     }
   },
@@ -2016,6 +2011,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2029,6 +2031,7 @@ __webpack_require__.r(__webpack_exports__);
         phone: '',
         email: '',
         bio: '',
+        bio_full: '',
         profile_picture: 'img/profile.jpg'
       }
     };
@@ -2056,8 +2059,9 @@ __webpack_require__.r(__webpack_exports__);
         _this.user_info.phone = res.phone;
         _this.user_info.email = res.email;
         _this.user_info.bio = res.bio;
+        _this.user_info.bio_full = _this.user_info.bio;
         _this.user_info.profile_picture = res.profile_picture;
-      });
+      }).then(this.cropBio);
     },
     addHover: function addHover(photo_id) {
       var element = document.getElementById(photo_id);
@@ -2066,6 +2070,38 @@ __webpack_require__.r(__webpack_exports__);
     removeHover: function removeHover(photo_id) {
       var element = document.getElementById(photo_id);
       element.classList.remove("hovered");
+    },
+    cropBio: function cropBio() {
+      this.user_info.bio_full = this.user_info.bio;
+
+      if (this.user_info.bio.length < 150) {
+        return;
+      }
+
+      var cropped_string = this.user_info.bio.slice(0, 150);
+      var last_position_is_break = false;
+
+      while (last_position_is_break === false) {
+        var last_character = cropped_string.substr(-1);
+        var second_last_character = cropped_string.substr(-2, 1);
+
+        if (last_character.match(/[ .,]/) !== null) {
+          cropped_string = cropped_string.slice(0, cropped_string.length - 1);
+
+          if (second_last_character.match(/[.,]/) !== null) {
+            cropped_string = cropped_string.slice(0, cropped_string.length - 1);
+          }
+
+          this.user_info.bio = cropped_string + '...';
+          last_position_is_break = true;
+          break;
+        } else {
+          cropped_string = cropped_string.slice(0, cropped_string.length - 1);
+        }
+      }
+    },
+    unCropBio: function unCropBio() {
+      this.user_info.bio = this.user_info.bio_full;
     }
   },
   mounted: function mounted() {
@@ -37643,7 +37679,7 @@ var render = function() {
           ? _c("i", { staticClass: "fas fa-heart" })
           : _vm._e(),
         _vm._v(" "),
-        !_vm.likes_count > 0
+        !(_vm.likes_count > 0)
           ? _c("i", { staticClass: "far fa-heart" })
           : _vm._e(),
         _vm._v("\n            " + _vm._s(this.likes_count) + "\n        ")
@@ -37676,46 +37712,64 @@ var render = function() {
   return _c("div", { staticClass: "app-container" }, [
     _c("div", { staticClass: "row no-gutters" }, [
       _c("div", { staticClass: "col" }, [
-        _c("div", { staticClass: "row header-row" }, [
-          _c("div", { staticClass: "col header-col" }, [
-            _c("div", { staticClass: "user-profile-pic" }, [
-              _c("img", {
-                attrs: {
-                  src: _vm.profile_picture_src,
-                  alt: _vm.profile_picture_alt
-                }
-              })
+        _c(
+          "div",
+          {
+            staticClass: "row header-row",
+            on: { mouseover: _vm.unCropBio, mouseleave: _vm.cropBio }
+          },
+          [
+            _c("div", { staticClass: "col header-col" }, [
+              _c("div", { staticClass: "user-profile-pic" }, [
+                _c("img", {
+                  attrs: {
+                    src: _vm.profile_picture_src,
+                    alt: _vm.profile_picture_alt
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "user-name" }, [
+                _vm._v(_vm._s(_vm.user_info.name))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "user-bio" }, [
+                _vm._v(_vm._s(_vm.user_info.bio))
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "user-contact-info-mobile" }, [
+                _vm._v(
+                  "\n                            " + _vm._s(_vm.user_info.phone)
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                            " + _vm._s(_vm.user_info.email)
+                ),
+                _c("br")
+              ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "user-name" }, [
-              _vm._v(_vm._s(_vm.user_info.name))
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "user-bio" }, [
-              _vm._v(_vm._s(_vm.user_info.bio))
+            _c("div", { staticClass: "col-4 header-col" }, [
+              _c("div", { staticClass: "user-contact-info" }, [
+                _vm._v(
+                  "\n                            ph: " +
+                    _vm._s(_vm.user_info.phone)
+                ),
+                _c("br"),
+                _vm._v(
+                  "\n                            em: " +
+                    _vm._s(_vm.user_info.email)
+                ),
+                _c("br"),
+                _vm._v("\n                            in: @nickphoto"),
+                _c("br"),
+                _vm._v(
+                  "\n                            tw: @nickphoto\n                        "
+                )
+              ])
             ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-3 header-col" }, [
-            _c("div", { staticClass: "user-contact-info" }, [
-              _vm._v(
-                "\n                            phone: " +
-                  _vm._s(_vm.user_info.phone)
-              ),
-              _c("br"),
-              _vm._v(
-                "\n                            email: " +
-                  _vm._s(_vm.user_info.email)
-              ),
-              _c("br"),
-              _vm._v("\n                            insta: @nickphoto"),
-              _c("br"),
-              _vm._v(
-                "\n                            twitter: @nickphoto\n                        "
-              )
-            ])
-          ])
-        ])
+          ]
+        )
       ])
     ]),
     _vm._v(" "),

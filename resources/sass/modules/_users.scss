@@ -8,18 +8,46 @@
         height: 100%;
         object-fit: fill;
     }
+
+    @include media-breakpoint-down(sm) {
+        display: none;
+    }
 }
 
 .user-name {
     font-family: $signature-family;
     font-size: 1.75em;
+
+    @include media-breakpoint-down(sm) {
+        padding: 0.6em;
+    }
 }
 
 .user-bio {
     display: flex;
     width: 50vw;
+
+    @include media-breakpoint-down(md) {
+        width: 42vw;
+    }
+
+    @include media-breakpoint-down(sm) {
+        display: none;
+    }
 }
 
 .user-contact-info {
     padding-top: 2.75em;
+
+    @include media-breakpoint-down(sm) {
+        display: none;
+    }
+}
+
+.user-contact-info-mobile {
+    padding: 0 1em 1em 1em;
+
+    @include media-breakpoint-up(sm) {
+        display: none;
+    }
 }

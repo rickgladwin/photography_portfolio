@@ -36,13 +36,12 @@ Route::get('user/{user}', function($userId) {
 });
 
 Route::get('photo/{photo}/likes_count', function ($photoId) {
-//    return new PhotoResource(Photo::find($photoId));
-//    $photoResource = new PhotoResource(Photo::find($photoId));
-//    return $photoResource['likes_count'];
-//    return Photo::find($photoId)->likes->count();
-    Log::debug("route photo/$photoId/likes_count called");
-    $likes_count = Photo::find($photoId)->likes->count();
-    Log::debug("returning " . json_encode(['likes_count' => $likes_count]));
+    try {
+        $likes_count = Photo::find($photoId)->likes->count();
+    } catch (Exception $e) {
+        $likes_count = 0;
+    }
+
     return json_encode(['likes_count' => $likes_count]);
 });
 

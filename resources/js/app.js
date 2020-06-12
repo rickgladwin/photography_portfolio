@@ -22,6 +22,7 @@ window.Vue = require('vue');
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('user', require('./components/User.vue').default);
 Vue.component('photo', require('./components/Photo.vue').default);
+Vue.component('like', require('./components/Like.vue').default);
 // Vue.component('test', require('./components/Test.vue').default);
 
 /**

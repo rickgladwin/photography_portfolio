@@ -47,3 +47,11 @@ Bootstrap was used for the view layout. It's not as configurable as css grid tec
 ## Notes
 
 I felt that the view layout for a project like this should have the images themselves taking up maximum space. And in the real world, there would be more than six images in a portfolio, so I added a few more from https://unsplash.com/@baileyzindel so that the layout makes sense.
+
+The app was built and tested on:
+* Ubuntu 18.04.4 LTS
+* nginx/1.15.8
+* MySQL 5.7.29
+* PHP 7.4.5
+
+and tested in Chrome Version 83.0.4103.97 in various viewport sizes. In production, more thorough cross-browser testing would be carried out.  

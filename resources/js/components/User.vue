@@ -68,6 +68,7 @@
             }
         },
         created() {
+            console.log('User component created.')
             this.fetchUser();
         },
         computed: {

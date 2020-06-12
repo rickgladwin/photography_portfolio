@@ -32,6 +32,7 @@
             'photo',
         ],
         created() {
+            console.log('Photo component created for id', this.photo.id);
             // this.fetchLikesCount();
         },
         methods: {
@@ -43,7 +44,7 @@
             // },
         },
         mounted() {
-            console.log('Photo component mounted.')
+            console.log('Photo component mounted for id', this.photo.id);
         }
     }
 </script>

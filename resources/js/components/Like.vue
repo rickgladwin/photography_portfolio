@@ -18,6 +18,7 @@
             'photo_id',
         ],
         created() {
+            console.log('Like component created for photo_id', this.photo_id)
             // this.fetchLikesCount();
         },
         methods: {
@@ -29,7 +30,8 @@
             },
         },
         mounted() {
-            console.log('Like component mounted.')
+            console.log('Like component mounted for photo_id', this.photo_id);
+            this.fetchLikesCount();
         }
     }
 </script>

@@ -1924,7 +1924,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: ['photo_id'],
-  created: function created() {// this.fetchLikesCount();
+  created: function created() {
+    console.log('Like component created for photo_id', this.photo_id); // this.fetchLikesCount();
   },
   methods: {
     fetchLikesCount: function fetchLikesCount() {
@@ -1939,7 +1940,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log('Like component mounted.');
+    console.log('Like component mounted for photo_id', this.photo_id);
+    this.fetchLikesCount();
   }
 });
 
@@ -1984,7 +1986,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: ['photo'],
-  created: function created() {// this.fetchLikesCount();
+  created: function created() {
+    console.log('Photo component created for id', this.photo.id); // this.fetchLikesCount();
   },
   methods: {// fetchLikesCount() {
     //     console.log(`fetchLikesCount(${this.photo.id})`);
@@ -1994,7 +1997,7 @@ __webpack_require__.r(__webpack_exports__);
     // },
   },
   mounted: function mounted() {
-    console.log('Photo component mounted.');
+    console.log('Photo component mounted for id', this.photo.id);
   }
 });
 
@@ -2078,6 +2081,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    console.log('User component created.');
     this.fetchUser();
   },
   computed: {

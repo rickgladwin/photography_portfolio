@@ -21,7 +21,7 @@ A mini portfolio page built on Laravel and MySQL, with a Vue front end.
   * This will install the dependencies and create the necessary tables and sample data
 * run `npm run watch` from the app root on the command line to run Laravel Mix (which uses webpacker to generate and configure assets)
 * start your Laravel server if necessary
-* If installation was successful, you should see the app at the root URL for the project (e.g. using vagrant and setting the site to )
+* If installation was successful, you should see the app at the root URL for the project (e.g. using vagrant and setting the site to http://photography_portfolio.test, as in the example Homestead.yaml file)
 
 
 ## Process

@@ -26,6 +26,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Passport::routes();
+        // Passport routes are registered automatically in newer Passport versions.
+        // Passport::routes();
     }
 }
